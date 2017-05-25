@@ -55,6 +55,7 @@ class CalculatorBrain {
             case .UnaryOperation(let function) :
                 accumulator = function(accumulator)
             case .BinaryOperation(let function) :
+                executePendingBinaryOperation()
                 pending = PendingBinaryOperationInfo(binaryFunction: function, firstOperand: accumulator)
             case .Equals :
                 executePendingBinaryOperation()
