@@ -44,7 +44,7 @@ class ViewController: UIViewController {
         }
         
         if let mathematicalSymbol = sender.currentTitle {
-            brain.performaOperation(symbol: mathematicalSymbol)
+            brain.performOperation(symbol: mathematicalSymbol)
         }
         displayValue = brain.result
     }

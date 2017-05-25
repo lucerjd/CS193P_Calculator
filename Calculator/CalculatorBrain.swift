@@ -47,7 +47,7 @@ class CalculatorBrain {
         accumulator = operand
     }
     
-    func performaOperation(symbol: String) {
+    func performOperation(symbol: String) {
         if let operation = operations[symbol] {
             switch operation {
             case .Constant(let value) :
