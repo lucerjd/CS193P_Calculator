@@ -51,6 +51,25 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func touchClear(_ sender: UIButton) {
+        userIsInTheMiddleOfTyping = false
+        alreadyTouchedPeriod = false
+        display.text! = "0"
+        brain.resetCalculatorState()
+        
+    }
+    
+    @IBAction func touchMemoryAdd(_ sender: UIButton) {
+        brain.memoryAdd(operand: displayValue)
+    }
+    
+    @IBAction func touchMemoryRemove(_ sender: UIButton) {
+        display.text! = String(brain.memoryRemove())
+        brain.setOperand(operand: displayValue)
+        userIsInTheMiddleOfTyping = false
+        displayValue = brain.result
+    }
+    
     @IBAction private func performOperation(_ sender: UIButton) {
         if (userIsInTheMiddleOfTyping) {
             brain.setOperand(operand: displayValue)

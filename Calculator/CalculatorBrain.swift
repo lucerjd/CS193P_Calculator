@@ -16,11 +16,15 @@ class CalculatorBrain {
     }
     
     private var accumulator = 0.0
+    private var storedAccumulator = 0.0
+    
     private var operations: Dictionary<String, Operation> = [
         "π": Operation.Constant(Double.pi),
         "e": Operation.Constant(M_E),
         "√": Operation.UnaryOperation(sqrt),
         "cos": Operation.UnaryOperation(cos),
+        "sin" : Operation.UnaryOperation(sin),
+        "±" : Operation.UnaryOperation({ -$0 }),
         "+" : Operation.BinaryOperation({ $0 + $1}),
         "−" : Operation.BinaryOperation({ $0 - $1}),
         "×" : Operation.BinaryOperation({ $0 * $1}),
@@ -68,5 +72,18 @@ class CalculatorBrain {
             accumulator = pending!.binaryFunction(pending!.firstOperand, accumulator)
             pending = nil
         }
+    }
+    
+    func resetCalculatorState() {
+        accumulator = 0.0
+        pending = nil
+    }
+
+    func memoryAdd(operand: Double) {
+        storedAccumulator = operand
+    }
+    
+    func memoryRemove() -> Double {
+        return storedAccumulator
     }
 }
