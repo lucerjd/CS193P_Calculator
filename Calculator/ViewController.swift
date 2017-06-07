@@ -14,6 +14,9 @@ class ViewController: UIViewController {
     
     private var displayValue: Double {
         get {
+            if (display.text! == ".") {
+                return 0.0
+            }
             return Double(display.text!)!
         }
         set {
@@ -22,6 +25,7 @@ class ViewController: UIViewController {
     }
     
     private var userIsInTheMiddleOfTyping = false
+    private var alreadyTouchedPeriod = false
     
     private var brain = CalculatorBrain()
     
@@ -37,10 +41,21 @@ class ViewController: UIViewController {
         userIsInTheMiddleOfTyping = true
     }
 
+    @IBAction func touchPeriod(_ sender: UIButton) {
+        if (alreadyTouchedPeriod) {
+            //Do Nothing
+        }
+        else {
+            alreadyTouchedPeriod = true
+            touchDigit(sender)
+        }
+    }
+    
     @IBAction private func performOperation(_ sender: UIButton) {
         if (userIsInTheMiddleOfTyping) {
             brain.setOperand(operand: displayValue)
             userIsInTheMiddleOfTyping = false
+            alreadyTouchedPeriod = false
         }
         
         if let mathematicalSymbol = sender.currentTitle {
